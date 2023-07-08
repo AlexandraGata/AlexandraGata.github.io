@@ -1,0 +1,620 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Editorial by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>MongoDB Project <br>
+                                            Manage a music store inventory</h1>
+									</header>
+
+									<span class="image main"><img src="images/MongoDB/MongoDB.jpg" alt="" /></span>
+
+                                    <h2>Scenario</h2>
+									<p>The scenario created for the database is a store that sells vinyl, CDs and other related products.</p>
+                                    <p>The store is constantly receiving supplies and selling products. Database creation aims to be able to keep track of stock. First, the store buys stock from one or more suppliers, and the quantity may vary between them. Contact details must be saved for each company.</p>
+                                    <p>Customers buy products in various quantities. Customer data is saved in case of future contact. In addition, the delivery address is required.</p>
+                                    <p>Within the database, a "Products" collection will be created. Documents in this collection will be composed of specific attributes (name, music genre, artist, product type, price). Additionally, each will have two arrays of objects: sales and supplies. </p>
+                                    <p>The project was created using variable names and data in Romanian. This is because it was part of the "Advanced Databases" course of my bachelor's.</p>
+
+
+                                    <ul class="actions">
+                                        <li><a href="#implementation" class="button big">Implementation</a></li>
+                                        <li><a href="#queries" class="button big">Queries</a></li>
+                                    </ul>
+									<hr class="major" />
+
+									<h2 id="implementation">Database schema</h2>
+
+
+                                    <!--Tables-->
+                                    <span class="image" ><img style="width: 70%;" src="images/MongoDB/Schema.png" alt="" /></span>
+
+                                    <table style="width: 4.7e+2pt;border-collapse:collapse;border:none;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="width: 467.5pt;border: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Produse</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Denumire</span></strong></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Tip de date</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>_id</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>integer</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>denumire</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>gen</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>artist</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>tipProd</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>pret</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>double</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>vanzari</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>array</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>aprovizionari</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>array</span></p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table style="width: 4.7e+2pt;border-collapse:collapse;border:none;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="width: 467.5pt;border: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>V&acirc;nzări</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Denumire</span></strong></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Tip de date</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>dataVanzare</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>date</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>cantitate</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>integer</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>client</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>object</span></p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>&nbsp;</span></strong></p>
+                                    <table style="width: 4.7e+2pt;border-collapse:collapse;border:none;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="width: 467.5pt;border: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Clienți</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Denumire</span></strong></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Tip de date</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>_id</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>integer</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>nume</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>adresa</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>localitatea</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>judet</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>nrTel</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>email</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>&nbsp;</span></strong></p>
+                                    <table style="width: 4.7e+2pt;border-collapse:collapse;border:none;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="width: 467.5pt;border: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Aprovizionări</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Denumire</span></strong></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Tip de date</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>dataAprov</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>date</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>cantitate</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>integer</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>firma</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>object</span></p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>&nbsp;</span></strong></p>
+                                    <table style="width: 4.7e+2pt;border-collapse:collapse;border:none;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="width: 467.5pt;border: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Firme</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Denumire</span></strong></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>Tip de date</span></strong></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>_id</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>integer</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>denumire</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>nrTel</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 233.75pt;border-right: 1pt solid black;border-bottom: 1pt solid black;border-left: 1pt solid black;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>email</span></p>
+                                                </td>
+                                                <td style="width: 233.75pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid black;padding: 0cm 5.4pt;vertical-align: top;">
+                                                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>string</span></p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!--End tables-->
+                                    
+
+									<hr class="major" />
+
+									<h2>Create database</h2>
+
+                                    <p>This project was created using MongoDB. For visualization, it was used MongoDB Compass.</p>
+                                    <pre><code>use magazin</code></pre>
+
+									<hr class="major" />
+
+									<h2>Populate database</h2>
+									<h3>Insert one product</h3>
+                                    <pre><code>
+                                        db.produse.insertOne(
+                                        {_id:1,
+                                        denumire:"The Wall", 
+                                        gen:"Rock", 
+                                        artist:"Pink Floyd", 
+                                        tipProd:"vinil",
+                                        pret: 120.99,
+                                        vanzari:[
+                                        {dataVanzare: new Date("2023-01-07"), cantitate: 1, 
+                                        client:{_id:10, nume:"Pop Alexandru", adresa:"str. Independentei, nr. 2", localitatea: "Dej", judet:"Cluj", nrTel:"0788676895", email:"andrei@gmail.com"}},
+                                        {dataVanzare: new Date("2023-01-09"), cantitate: 2,  
+                                        client:{_id:20, nume:"Chira Andrei", adresa:"str. Decebal, nr. 3", localitatea: "Baia Mare", judet:"Maramures", nrTel:"0786676895", email:"andrei@gmail.com"}},
+                                        {dataVanzare: Date(), cantitate: 1,  
+                                        client:{_id:30, nume:"Gata Alexandra", adresa:"str. Venus, nr. 4", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0775858599", email:"alexandra@gmail.com"}}], 
+                                        aprovizionari:[
+                                        {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                        firma:{_id:100, denumire:"Records SRL",  nrTel:"0711776895", email:"contact@records.com"}}, 
+                                        {dataAprov: Date(), cantitate: 15,  
+                                        firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]})
+                                        </code></pre>
+
+                                        <span class="image" ><img src="images/MongoDB/Picture1.png" alt="" /></span>  <br>   
+                                        <span class="image" ><img src="images/MongoDB/Picture2.png" alt="" /></span>
+
+
+                                        <h3>Insert multiple products</h3>
+                                        
+                                        <pre><code> 
+                                            db.produse.insertMany([
+                                            {_id:2,
+                                            denumire:"Unlimited Love", 
+                                            gen:"Alternative/Indie", 
+                                            artist:"Red Hot Chilli Peppers", 
+                                            tipProd:"vinil",
+                                            pret:115.99,
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-07"), cantitate: 3, 
+                                            client:{_id:10, nume:"Pop Alexandru", adresa:"str. Independentei, nr. 2", localitatea: "Dej", judet:"Cluj", nrTel:"0788676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: new Date("2023-01-09"), cantitate: 2,  
+                                            client:{_id:40, nume:"Popan Anca", adresa:"Aleea Mestecenilor, nr. 7", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0799148599", email:"anca.popan@gmail.com"}},
+                                            {dataVanzare: Date(), cantitate: 1,  
+                                            client:{_id:30, nume:"Gata Alexandra", adresa:"str. Venus, nr. 4", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0775858599", email:"alexandra@gmail.com"}}], 
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 20, 
+                                            firma:{_id:400, denumire:"Disc", nrTel:"0788225595", email:"contact@disc.com"}},
+                                            {dataAprov: Date(), cantitate: 15,  
+                                            firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]},
+                                            {_id:3,
+                                            denumire:"Remembering Dolores", 
+                                            gen:"Alternative/Indie", 
+                                            artist:"The Cranberries", 
+                                            tipProd:"vinil",
+                                            pret:117.99,
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-07"), cantitate: 1, 
+                                            client:{_id:50, nume:"Florescu Cristi", adresa:"str. Dostoievski, nr. 14", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0731158599", email:"florescu@gmail.com"}}, 
+                                            {dataVanzare: new Date("2023-01-09"), cantitate: 2,  
+                                            client:{_id:20, nume:"Chira Andrei", adresa:"str. Decebal, nr. 3", localitatea: "Baia Mare", judet:"Maramures", nrTel:"0786676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: Date(), cantitate: 1,  
+                                            client:{_id:30, nume:"Gata Alexandra", adresa:"str. Venus, nr. 4", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0775858599", email:"alexandra@gmail.com"}}], 
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:100, denumire:"Records SRL",  nrTel:"0711776895", email:"contact@records.com"}}, 
+                                            {dataAprov: Date(), cantitate: 20,  
+                                            firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]},
+                                            {_id:4,
+                                            denumire:"Lady in the Balcony", 
+                                            gen:"Jazz/Blues", 
+                                            artist:"Eric Clapton", 
+                                            tipProd:"vinil",
+                                            pret:115.99,
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-07"), cantitate: 1, 
+                                            client:{_id:10, nume:"Pop Alexandru", adresa:"str. Independentei, nr. 2", localitatea: "Dej", judet:"Cluj", nrTel:"0788676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: new Date("2023-01-09"), cantitate: 2,  
+                                            client:{_id:20, nume:"Chira Andrei", adresa:"str. Decebal, nr. 3", localitatea: "Baia Mare", judet:"Maramures", nrTel:"0786676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: Date(), cantitate: 1,  
+                                            client:{_id:30, nume:"Gata Alexandra", adresa:"str. Venus, nr. 4", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0775858599", email:"alexandra@gmail.com"}}], 
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:400, denumire:"Disc", nrTel:"0788225595", email:"contact@disc.com"}},
+                                            {dataAprov: Date(), cantitate: 15,  
+                                            firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]},
+                                            {_id:5,
+                                            denumire:"Dawn FM", 
+                                            gen:"Pop", 
+                                            artist:"The Weeknd", 
+                                            tipProd:"vinil",
+                                            pret:110.99,
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-07"), cantitate: 1, 
+                                            client:{_id:10, nume:"Pop Alexandru", adresa:"str. Independentei, nr. 2", localitatea: "Dej", judet:"Cluj", nrTel:"0788676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: new Date("2023-01-09"), cantitate: 2,  
+                                            client:{_id:20, nume:"Chira Andrei", adresa:"str. Decebal, nr. 3", localitatea: "Baia Mare", judet:"Maramures", nrTel:"0786676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: Date(), cantitate: 1,  
+                                            client:{_id:40, nume:"Popan Anca", adresa:"Aleea Mestecenilor, nr. 7", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0799148599", email:"anca.popan@gmail.com"}}],
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:100, denumire:"Records SRL",  nrTel:"0711776895", email:"contact@records.com"}}, 
+                                            {dataAprov: Date(), cantitate: 15,  
+                                            firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]},
+                                            {_id:6,
+                                            denumire:"Rock Believer", 
+                                            gen:"Rock", 
+                                            artist:"Scorpions", 
+                                            tipProd:"CD",
+                                            pret:119.99,
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-07"), cantitate: 1, 
+                                            client:{_id:10, nume:"Pop Alexandru", adresa:"str. Independentei, nr. 2", localitatea: "Dej", judet:"Cluj", nrTel:"0788676895", email:"andrei@gmail.com"}}],
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:100, denumire:"Records SRL",  nrTel:"0711776895", email:"contact@records.com"}}, 
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:300, denumire:"Vinyls Comp", nrTel:"079115595", email:"contact@vinylsc.com"}},
+                                            {dataAprov: Date(), cantitate: 15,  
+                                            firma:{_id:300, denumire:"Vinyls Comp", nrTel:"079115595", email:"contact@vinylsc.com"}}]},
+                                            {_id:7,
+                                            denumire:"After Hours", 
+                                            gen:"Pop", 
+                                            artist:"The Weeknd",
+                                            tipProd:"CD",
+                                            pret:110.99,
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-09"), cantitate: 2,  
+                                            client:{_id:10, nume:"Pop Alexandru", adresa:"str. Independentei, nr. 2", localitatea: "Dej", judet:"Cluj", nrTel:"0788676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: Date(), cantitate: 1,  
+                                            client:{_id:50, nume:"Florescu Cristi", adresa:"str. Dostoievski, nr. 14", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0731158599", email:"florescu@gmail.com"}}], 
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:300, denumire:"Vinyls Comp", nrTel:"079115595", email:"contact@vinylsc.com"}},
+                                            {dataAprov: Date(), cantitate: 15,  
+                                            firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]},
+                                            {_id:8,
+                                            denumire:"The Dark Side of the Moon", 
+                                            gen:"Rock", 
+                                            artist:"Pink Floyd", 
+                                            tipProd:"vinil",
+                                            pret:118.99,
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-07"), cantitate: 1, 
+                                            client:{_id:50, nume:"Florescu Cristi", adresa:"str. Dostoievski, nr. 14", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0731158599", email:"florescu@gmail.com"}}, 
+                                            {dataVanzare: new Date("2023-01-09"), cantitate: 1,  
+                                            client:{_id:20, nume:"Chira Andrei", adresa:"str. Decebal, nr. 3", localitatea: "Baia Mare", judet:"Maramures", nrTel:"0786676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: Date(), cantitate: 1,  
+                                            client:{_id:30, nume:"Gata Alexandra", adresa:"str. Venus, nr. 4", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0775858599", email:"alexandra@gmail.com"}}], 
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:100, denumire:"Records SRL",  nrTel:"0711776895", email:"contact@records.com"}}, 
+                                            {dataAprov: Date(), cantitate: 15,  
+                                            firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]}])
+                                            </code></pre>
+    
+                                        <span class="image" ><img src="images/MongoDB/Picture4.png" alt="" /></span>  <br>   
+                                        <span class="image" ><img src="images/MongoDB/Picture5.png" alt="" /></span>  <br>
+                                        <span class="image" ><img src="images/MongoDB/Picture6.png" alt="" /></span>  <br>   
+                                        <span class="image" ><img src="images/MongoDB/Picture7.png" alt="" /></span>  <br>
+
+                                        <hr class="major" />
+
+                                        <h2>Delete product</h2>
+                                        
+                                        <pre><code> db.produse.deleteOne({"vanzari.client.nume":"Gata Alexandra"}) </code></pre>
+    
+                                        <span class="image" ><img src="images/MongoDB/Picture8.png" alt="" /></span>  <br>   
+                                        
+                                        <hr class="major" />
+
+                                        <h2>Update product</h2>
+                                        
+                                        <pre><code> db.produse.update({_id:3,"vanzari.dataVanzare": ISODate("2023-01-07T00:00:00.000Z")},{$set: {"vanzari.$.cantitate":5}})</code></pre>
+    
+                                        <span class="image" ><img src="images/MongoDB/Picture9.png" alt="" /></span>  <br>   
+                                       
+
+                                        <hr class="major" />
+
+                                        <h2>Insert product with different structure</h2>
+                                        
+                                        <p>
+                                            The store extend its stock and now it offers posters. These items require a size ("dimensiune") attribute.</p>
+
+                                        <pre><code> 
+                                            db.produse.insertOne(
+                                            {_id:9,
+                                            denumire:"Poster Pink Floyd - The Wall Album", 
+                                            gen:"Rock", 
+                                            artist:"Pink Floyd", 
+                                            tipProd:"poster",
+                                            pret:50.99,
+                                            dimensiune:"91.5x61cm",
+                                            vanzari:[
+                                            {dataVanzare: new Date("2023-01-07"), cantitate: 1, 
+                                            client:{_id:10, nume:"Pop Alexandru", adresa:"str. Independentei, nr. 2", localitatea: "Dej", judet:"Cluj", nrTel:"0788676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: new Date("2023-01-09"), cantitate: 2,  
+                                            client:{_id:20, nume:"Chira Andrei", adresa:"str. Decebal, nr. 3", localitatea: "Baia Mare", judet:"Maramures", nrTel:"0786676895", email:"andrei@gmail.com"}},
+                                            {dataVanzare: Date(), cantitate: 1,  
+                                            client:{_id:30, nume:"Gata Alexandra", adresa:"str. Venus, nr. 4", localitatea: "Cluj-Napoca", judet:"Cluj", nrTel:"0775858599", email:"alexandra@gmail.com"}}], 
+                                            aprovizionari:[
+                                            {dataAprov: new Date("2023-01-06"), cantitate: 10, 
+                                            firma:{_id:100, denumire:"Records SRL",  nrTel:"0711776895", email:"contact@records.com"}}, 
+                                            {dataAprov: Date(), cantitate: 15,  
+                                            firma:{_id:200, denumire:"Good Sounds", nrTel:"0788675595", email:"contact@gsounds.com"}}]})
+                                            </code></pre>
+    
+                                       
+                                        <hr class="major" />
+
+                                        <h2 id="queries">Queries</h2>
+                                        
+                                        <h3>How many products were sold on 07/01/2023.</h3>
+                                        <pre><code>db.produse.countDocuments({"vanzari.dataVanzare":ISODate("2023-01-09T00:00:00.000Z")}) </code></pre>
+                                        <span class="image" ><img src="images/MongoDB/Picture10.png" alt="" /></span>  <br>   
+                                        <h3>What is the current stock of the product with id 7?</h3>
+                                        <pre><code> 
+                                            db.produse.aggregate([{ $match: { _id: 7 } }, 
+                                            { $addFields: { totalCantitateAprovizionare: { $sum: "$aprovizionari.cantitate" }, totalCantitateVanduta: { $sum: "$vanzari.cantitate" } } }, 
+                                            { $project: { denumire: "$denumire", Stoc: { $subtract: ["$totalCantitateAprovizionare", "$totalCantitateVanduta"] } } }])
+                                             </code></pre>
+                                        <span class="image" ><img src="images/MongoDB/Picture11.png" alt="" /></span>  <br>   
+                                        <h3>All the products that were bought by clients that are not from Cluj-Napoca.</h3>
+                                        <pre><code> db.produse.find({"vanzari.client.localitate":{$ne:"Cluj-Napoca"}},{denumire:1}).sort({denumire:1})</code></pre>
+                                        <span class="image" ><img src="images/MongoDB/Picture12.png" alt="" /></span>  <br>   
+                                        <h3>All the companies that restocked.</h3>
+                                        <pre><code> db.produse.distinct("aprovizionari.firma")</code></pre>
+                                        <span class="image" ><img src="images/MongoDB/Picture13.png" alt="" /></span>  <br>   
+                                        <h3>How many items were stocked and how many were sold for product with id 9.</h3>
+                                        <pre><code>
+                                            db.produse.aggregate([{ $match: { _id: 9} }, 
+                                            { $addFields: {totalCantitateAprovizionare:{ $sum: "$aprovizionari.cantitate" },totalCantitateVanduta:{ $sum: "$vanzari.cantitate" }}}, 
+                                            { $project : { denumire : "$denumire" , Aprovizionare:"$totalCantitateAprovizionare" ,Vandut:"$totalCantitateVanduta"}}])
+                                             </code></pre>
+                                        <span class="image" ><img src="images/MongoDB/Picture14.png" alt="" /></span>  <br>   
+                                        <h3>The product with the highest price,</h3>
+                                        <pre><code>db.produse.find({tipProd:"vinil"},{denumire:1,pret:1}).sort({pret:-1}).limit(1) </code></pre>
+                                        <span class="image" ><img src="images/MongoDB/Picture15.png" alt="" /></span>  <br>   
+                                        <h3>What was the profit from all the products with id 9 sold.</h3>
+                                        <pre><code> 
+                                            db.produse.aggregate([{ $match: { _id: 9 } }, 
+                                            { $addFields: { totalCantitateAprovizionare: { $sum: "$aprovizionari.cantitate" }, 
+                                            totalCantitateVanduta: { $sum: "$vanzari.cantitate" } } }, 
+                                            { $project: { denumire: "$denumire", venit:{$multiply:["$pret", 
+                                            { $subtract: ["$totalCantitateAprovizionare", "$totalCantitateVanduta"]}]} } }])
+                                            </code></pre>
+                                        <span class="image" ><img src="images/MongoDB/Picture16.png" alt="" /></span>  <br>   
+                                        
+
+
+								</section>
+
+						</div>
+					</div>
+
+				
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
